@@ -59,7 +59,7 @@ function get_my_name() {
 }
 
 function get_version() {
-	return "0.0.3";
+	return "0.0.4";
 }
 
 function get_author() {
@@ -118,6 +118,7 @@ function start_search(info, callback) {
 							case "new_merge" :
 								if ((lyric.lyric.length > 128) && (lyric.trans.length > 128)) {
 									new_lyric.LyricText = lrc_newtype(Base64.decode(lyric.lyric), Base64.decode(lyric.trans), false);
+									new_lyric.LyricText = convert_character_entities(new_lyric.LyricText)
 									new_lyric.Title = song.data.song.list[i].title + " (并排)";
 									for (j = 0, new_lyric.Artist = ""; j < song.data.song.list[i].singer.length; j++) {
 										new_lyric.Artist += (j === 0 ? "" : ",") + song.data.song.list[i].singer[j].title;
@@ -130,6 +131,7 @@ function start_search(info, callback) {
 							case "origin" :
 								if (lyric.lyric.length > 128) {
 									new_lyric.LyricText = Base64.decode(lyric.lyric);
+									new_lyric.LyricText = convert_character_entities(new_lyric.LyricText)
 									new_lyric.Title = song.data.song.list[i].title + ((lyric.trans.length > 128) ? " (原词)" : "");
 									for (j = 0, new_lyric.Artist = ""; j < song.data.song.list[i].singer.length; j++) {
 										new_lyric.Artist += (j === 0 ? "" : ",") + song.data.song.list[i].singer[j].title;
@@ -142,6 +144,7 @@ function start_search(info, callback) {
 							case "tran" :
 								if (lyric.trans.length > 128) {
 									new_lyric.LyricText = Base64.decode(lyric.trans);
+									new_lyric.LyricText = convert_character_entities(new_lyric.LyricText)
 									new_lyric.Title = song.data.song.list[i].title + " (翻译)";
 									for (j = 0, new_lyric.Artist = ""; j < song.data.song.list[i].singer.length; j++) {
 										new_lyric.Artist += (j === 0 ? "" : ",") + song.data.song.list[i].singer[j].title;
@@ -154,6 +157,7 @@ function start_search(info, callback) {
 							case "newtype":
 								if ((lyric.lyric.length > 128) && (lyric.trans.length > 128)) {
 									new_lyric.LyricText = lrc_newtype(Base64.decode(lyric.lyric), Base64.decode(lyric.trans), true);
+									new_lyric.LyricText = convert_character_entities(new_lyric.LyricText)
 									new_lyric.Title = song.data.song.list[i].title + " (并列)";
 									for (j = 0, new_lyric.Artist = ""; j < song.data.song.list[i].singer.length; j++) {
 										new_lyric.Artist += (j === 0 ? "" : ",") + song.data.song.list[i].singer[j].title;
@@ -167,6 +171,7 @@ function start_search(info, callback) {
 								if ((lyric.lyric.length > 128) && (lyric.trans.length > 128)) {
 									new_lyric.LyricText = lrc_merge(Base64.decode(lyric.lyric), Base64.decode(lyric.trans));
 									new_lyric.Title = song.data.song.list[i].title + " (并排-旧)";
+									new_lyric.LyricText = convert_character_entities(new_lyric.LyricText)
 									for (j = 0, new_lyric.Artist = ""; j < song.data.song.list[i].singer.length; j++) {
 										new_lyric.Artist += (j === 0 ? "" : ",") + song.data.song.list[i].singer[j].title;
 									}
@@ -186,6 +191,12 @@ function start_search(info, callback) {
 			new_lyric.Dispose();
 		}
 	}
+}
+
+function convert_character_entities(lrc) {
+	// 替换 &quot; 为 "
+	lrc = lrc.replace(/&quot;/g, '\"');
+	return lrc
 }
 
 function qm_download(url, param) {
