@@ -1,68 +1,4 @@
-var bracket = [
-	"「", //左括号
-	"」"  //右括号
-];
-
-function lrc_merge(olrc, tlrc) {
-	olrc = olrc.split("\n");
-	tlrc = tlrc.split("\n");
-	if (olrc[5].indexOf("[kana:") == 0) {
-		olrc.splice(5, 1);
-		tlrc.splice(5, 1);
-	}
-	var o_f = olrc[0].indexOf("[by:");
-	if (o_f == 0) {
-		var o_b = olrc[0].indexOf("]");
-		var o = (o_f != -1 && o_b != -1) ? olrc[0].substring(4, o_b) : "";
-
-		var t_f = tlrc[0].indexOf("[by:");
-		var t_b = tlrc[0].indexOf("]");
-		var t = (t_f != -1 && t_b != -1) ? olrc[0].substring(4, o_b) : "";
-		olrc[0] = "[by:" + o + "/译:" + t + "]";
-	}
-	for (var ii = 5, set = 0, counter; ii < 10; ii++) {//玄学取set...
-		counter = olrc[ii].indexOf("]");
-		counter = (counter == -1) ? 9 : counter;
-		set += counter;
-	}
-	set = Math.round(set / 5);
-	var i = 0;
-	var l = tlrc.length;
-	var lrc = [];
-	for (var k in olrc) {
-		var a = olrc[k].substring(1, set);
-		while (i < l) {
-			var j = 0;
-			var tf = 0;
-			while (j < 5) {
-				if (k < 5) { i++; break; }// 前五项不用管，因为是歌曲信息
-				if (i + j >= l) break;
-				var b = tlrc[i + j].substring(1, set);
-				if (a == b) {
-					tf = 1;
-					i += j;
-					break;
-				}
-				j++;
-			}
-			if (tf == 0) {
-				lrc[k] = olrc[k];
-				break;
-			}
-			var c = tlrc[i].substr(set + 1);
-			// 排除 // 字符串，不知道这是什么东西
-			if (c && c != '//') {
-				lrc[k] = olrc[k] + bracket[0] + tlrc[i].substr(set + 1) + bracket[1];
-				i++;
-				break;
-			} else {
-				lrc[k] = olrc[k];
-				break;
-			}
-		}
-	}
-	return lrc.join("\n");
-}
+const qq = require('../src/qq.js');
 
 olrc = `[ti:Sing My Pleasure]
 [ar:八木海莉]
@@ -182,4 +118,5 @@ tlrc = `[ti:Sing My Pleasure]
 [04:19.26]请静静地闭上双眼吧
 [04:24.25]把您的梦想托付于我`
 
-console.log(lrc_merge(olrc, tlrc))
+console.log(qq.lrc_merge(olrc, tlrc))
+console.log(qq.lrc_newtype(olrc, tlrc, true))
