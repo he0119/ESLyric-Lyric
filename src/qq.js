@@ -349,6 +349,7 @@ function lrc_merge(olrc, tlrc) {
             var j = 0;
             var tf = 0;
             while (j < 5) {
+                if (k < 5) { i++; break; }// 前五项不用管，因为是歌曲信息
                 if (i + j >= l) break;
                 var b = tlrc[i + j].substring(1, set);
                 if (a == b) {
@@ -413,6 +414,7 @@ function lrc_newtype(olrc, tlrc, merge_type) {
         var j = 0;
         var tf = 0;//标记变量,时间轴符合置1
         while (j < 5) {
+            if (k < 5) { i++; break; }// 前五项不用管，因为是歌曲信息
             if (i + j >= l) break;//防溢出数组
             var b = tlrc[i + j].substring(1, set);
             if (a == b) {

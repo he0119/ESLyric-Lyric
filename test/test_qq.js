@@ -35,6 +35,7 @@ function lrc_merge(olrc, tlrc) {
 			var j = 0;
 			var tf = 0;
 			while (j < 5) {
+				if (k < 5) { i++; break; }// 前五项不用管，因为是歌曲信息
 				if (i + j >= l) break;
 				var b = tlrc[i + j].substring(1, set);
 				if (a == b) {
