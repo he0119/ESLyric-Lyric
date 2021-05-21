@@ -364,7 +364,8 @@ function lrc_merge(olrc, tlrc) {
                 break;
             }
             var c = tlrc[i].substr(set + 1);
-            if (c) {
+            // 排除 // 字符串
+            if (c && c != '//') {
                 lrc[k] = olrc[k] + bracket[0] + tlrc[i].substr(set + 1) + bracket[1];
                 i++;
                 break;
