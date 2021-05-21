@@ -320,8 +320,8 @@ function lrc_merge(olrc, tlrc) {
     olrc = olrc.split("\n");
     tlrc = tlrc.split("\n");
     if (olrc[5].indexOf("[kana:") == 0) {
-        olrc.splice(5, 5);
-        tlrc.splice(5, 5);
+        olrc.splice(5, 1);
+        tlrc.splice(5, 1);
     }
     var o_f = olrc[0].indexOf("[by:");
     if (o_f == 0) {
@@ -381,8 +381,8 @@ function lrc_newtype(olrc, tlrc, merge_type) {
     olrc = olrc.split("\n");
     tlrc = tlrc.split("\n");
     if (olrc[5].indexOf("[kana:") == 0) {
-        olrc.splice(5, 5);
-        tlrc.splice(5, 5);
+        olrc.splice(5, 1);
+        tlrc.splice(5, 1);
     }
     /*
     var o_f = olrc[0].indexOf("[by:");
