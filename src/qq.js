@@ -380,6 +380,7 @@ function lrc_merge(olrc, tlrc) {
 
 }
 function lrc_newtype(olrc, tlrc, merge_type) {
+    // FIXME: 并排格式还是有问题 
     olrc = olrc.split("\n");
     tlrc = tlrc.split("\n");
     if (olrc[5].indexOf("[kana:") == 0) {
