@@ -59,7 +59,7 @@ function get_my_name() {
 }
 
 function get_version() {
-	return "0.0.4";
+	return "0.1.0";
 }
 
 function get_author() {
