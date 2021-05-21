@@ -319,6 +319,10 @@ function qm_trace(str) {
 function lrc_merge(olrc, tlrc) {
 	olrc = olrc.split("\n");
 	tlrc = tlrc.split("\n");
+	if (olrc[5].indexOf("[kana:") == 0) {
+		olrc.splice(5,5);
+		tlrc.splice(5,5);
+	}
 	var o_f = olrc[0].indexOf("[by:");
 	if (o_f == 0) {
 		var o_b = olrc[0].indexOf("]");
@@ -375,6 +379,10 @@ function lrc_merge(olrc, tlrc) {
 function lrc_newtype(olrc, tlrc, merge_type) {
 	olrc = olrc.split("\n");
 	tlrc = tlrc.split("\n");
+	if (olrc[5].indexOf("[kana:") == 0) {
+		olrc.splice(5,5);
+		tlrc.splice(5,5);
+	}
 	/*
 	var o_f = olrc[0].indexOf("[by:");
 	if (o_f == 0) {
