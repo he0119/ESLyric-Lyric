@@ -319,6 +319,7 @@ function qm_trace(str) {
 function lrc_merge(olrc, tlrc) {
     olrc = olrc.split("\n");
     tlrc = tlrc.split("\n");
+    // 删除 kana 这一项
     if (olrc[5].indexOf("[kana:") == 0) {
         olrc.splice(5, 1);
         tlrc.splice(5, 1);
