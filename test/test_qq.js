@@ -7,8 +7,8 @@ function lrc_merge(olrc, tlrc) {
 	olrc = olrc.split("\n");
 	tlrc = tlrc.split("\n");
 	if (olrc[5].indexOf("[kana:") == 0) {
-		olrc.splice(5,5);
-		tlrc.splice(5,5);
+		olrc.splice(5, 5);
+		tlrc.splice(5, 5);
 	}
 	var o_f = olrc[0].indexOf("[by:");
 	if (o_f == 0) {
@@ -20,12 +20,12 @@ function lrc_merge(olrc, tlrc) {
 		var t = (t_f != -1 && t_b != -1) ? olrc[0].substring(4, o_b) : "";
 		olrc[0] = "[by:" + o + "/译:" + t + "]";
 	}
-	for (var ii = 5,set=0,counter; ii < 10; ii++) {//玄学取set...
+	for (var ii = 5, set = 0, counter; ii < 10; ii++) {//玄学取set...
 		counter = olrc[ii].indexOf("]");
 		counter = (counter == -1) ? 9 : counter;
-		set+=counter;
+		set += counter;
 	}
-	set = Math.round(set/5);
+	set = Math.round(set / 5);
 	var i = 0;
 	var l = tlrc.length;
 	var lrc = [];
