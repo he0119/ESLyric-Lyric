@@ -158,7 +158,7 @@ function start_search(info, callback) {
                                 if ((lyric.lyric.length > 128) && (lyric.trans.length > 128)) {
                                     new_lyric.LyricText = lrc_newtype(Base64.decode(lyric.lyric), Base64.decode(lyric.trans), true);
                                     new_lyric.LyricText = convert_character_entities(new_lyric.LyricText)
-                                    new_lyric.Title = song.data.song.list[i].title + " (并列)";
+                                    new_lyric.Title = song.data.song.list[i].title;
                                     for (j = 0, new_lyric.Artist = ""; j < song.data.song.list[i].singer.length; j++) {
                                         new_lyric.Artist += (j === 0 ? "" : ",") + song.data.song.list[i].singer[j].title;
                                     }
