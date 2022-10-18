@@ -65,8 +65,7 @@ export function getLyrics(meta, man) {
 
 }
 
-function queryLyricV3(meta, man, songList)
-{
+function queryLyricV3(meta, man, songList) {
     let lyricCount = 0;
     let headers = {};
     headers['Referer'] = 'https://y.qq.com';
@@ -96,25 +95,25 @@ function queryLyricV3(meta, man, songList)
         }
     };
 
-    for(const song of songList) {
+    for (const song of songList) {
         let songID = song.id | 0;
         postData['music.musichallSong.PlayLyricInfo.GetPlayLyricInfo']['param'] = {
-            albumName : btoa(song.album),
-            crypt : 1,
-            ct : 19,
-            cv : 1873,
-            interval : meta.duration | 0,
-            lrc_t : 0,
-            qrc : 1,
-            qrc_t : 0,
-            roma : 1,
-            roma_t : 0,
-            singerName : btoa(song.album),
-            songID : songID,
-            songName : btoa(song.artist),
-            trans : 1,
-            trans_t : 0,
-            type : -1
+            albumName: btoa(song.album),
+            crypt: 1,
+            ct: 19,
+            cv: 1873,
+            interval: meta.duration | 0,
+            lrc_t: 0,
+            qrc: 1,
+            qrc_t: 0,
+            roma: 1,
+            roma_t: 0,
+            singerName: btoa(song.album),
+            songID: songID,
+            songName: btoa(song.artist),
+            trans: 1,
+            trans_t: 0,
+            type: -1
         }
 
         let url = 'https://u.y.qq.com/cgi-bin/musicu.fcg?';
@@ -129,12 +128,12 @@ function queryLyricV3(meta, man, songList)
             headers: headers,
             body: postDataString
         };
-    
+
         request(settings, (err, res, body) => {
             if (err || res.statusCode != 200) {
                 return;
             }
-            
+
             try {
                 let obj = JSON.parse(body);
                 if (obj['code'] != 0) {
@@ -174,8 +173,7 @@ function queryLyricV3(meta, man, songList)
     return lyricCount;
 }
 
-function queryLyricV2(meta, man, songList)
-{
+function queryLyricV2(meta, man, songList) {
     let headers = {};
     headers['Referer'] = 'https://y.qq.com';
 
@@ -222,8 +220,7 @@ function queryLyricV2(meta, man, songList)
     }
 }
 
-function queryLyric(meta, man)
-{
+function queryLyric(meta, man) {
     let headers = {};
     headers['Referer'] = 'https://y.qq.com';
 

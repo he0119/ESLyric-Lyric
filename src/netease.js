@@ -112,7 +112,7 @@ export function getLyrics(meta, man) {
                 album = album['name'] || '';
                 candicates.push({ id: id, title: title, artist: artist, album: album });
             }
-        } catch(e){ }
+        } catch (e) { }
         var lyricMeta = man.createLyric();
         for (const item of candicates) {
             const queryData = {
@@ -137,7 +137,7 @@ export function getLyrics(meta, man) {
                     lyricMeta.album = item.album;
                     lyricMeta.lyricText = lyricText;
                     man.addLyric(lyricMeta);
-                } catch(e){ }
+                } catch (e) { }
             });
         }
     });

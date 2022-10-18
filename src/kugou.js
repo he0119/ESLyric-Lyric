@@ -56,7 +56,7 @@ export function getLyrics(meta, man) {
                         lyric_meta.fileType = "krc";
                         man.addLyric(lyric_meta);
                     }
-                } catch(e) {
+                } catch (e) {
                     console.log(e);
                 }
             }

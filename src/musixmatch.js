@@ -1,8 +1,7 @@
 
 
 
-export function getConfig(cfg)
-{
+export function getConfig(cfg) {
     cfg.name = "Musixmatch";
     cfg.version = "0.1";
     cfg.author = "ohyeah";
@@ -10,8 +9,7 @@ export function getConfig(cfg)
 }
 
 
-export function getLyrics(meta, man)
-{
+export function getLyrics(meta, man) {
     evalLib("querystring/querystring.min.js");
 
     let token = queryToken(man);
@@ -54,7 +52,7 @@ export function getLyrics(meta, man)
         try {
             let obj = JSON.parse(body);
             let trackList = obj['message']['body']['track_list'];
-            for(const trackObj of trackList) {
+            for (const trackObj of trackList) {
                 let track = trackObj['track'];
                 let id = track['commontrack_id'] | 0;
                 let title = track['track_name'];
@@ -62,7 +60,7 @@ export function getLyrics(meta, man)
                 let album = track['album_name'];
                 let has_lyrics = track['has_lyrics'] | 0;
                 let has_subtitles = track['has_subtitles'] | 0;
-                
+
                 if (id == 0) {
                     continue;
                 }
@@ -80,7 +78,7 @@ export function getLyrics(meta, man)
     });
 
     let lyricMeta = man.createLyric();
-    for(const song of songList) {
+    for (const song of songList) {
 
         if (man.checkAbort()) {
             return;
@@ -159,14 +157,14 @@ function queryToken(man) {
 
         let headers = {};
         headers['cookie'] = 'AWSELBCORS=0; AWSELB=0';
-    
+
         let queryUrl = kUrl + querystring.stringify(params);
         let settings = {
             url: queryUrl,
             method: 'GET',
             headers: headers,
         }
-        
+
         log('query token...');
 
         request(settings, (err, res, body) => {
@@ -185,7 +183,7 @@ function queryToken(man) {
         if (token == 'UpgradeOnlyUpgradeOnlyUpgradeOnlyUpgradeOnly') {
             token = '';
         }
-        
+
         if (token != '') {
             man.setSvcData('token', token);
             man.setSvcData('lastTokenUpdated', new Date().toUTCString());
