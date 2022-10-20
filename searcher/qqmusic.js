@@ -244,7 +244,6 @@ function queryLyric(meta, man, songList) {
         };
 
         request(settings, (err, res, body) => {
-            console.log(err + url);
             if (!err && res.statusCode === 200) {
                 try {
                     var obj = JSON.parse(body);
